@@ -1,2 +1,1 @@
 export { PersonInfo } from "./PersonInfo";
-

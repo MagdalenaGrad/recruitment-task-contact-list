@@ -7,6 +7,8 @@ interface UseContactListReturn extends ContactListState {
   retryFetch: () => Promise<void>;
 }
 
+export const PAGE_SIZE = 10;
+
 export function useContactList(): UseContactListReturn {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [loadingState, setLoadingState] = useState<LoadingState>("idle");
@@ -39,7 +41,7 @@ export function useContactList(): UseContactListReturn {
       } else {
         setContacts((prevContacts) => [...prevContacts, ...newContacts]);
         // If we got less than 10 items, we might be at the end
-        if (newContacts.length < 10) {
+        if (newContacts.length < PAGE_SIZE) {
           setHasMore(false);
         }
       }
@@ -51,7 +53,8 @@ export function useContactList(): UseContactListReturn {
     } finally {
       isFetchingRef.current = false;
     }
-  }, [contacts.length, hasMore]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasMore]);
 
   const loadMore = useCallback(async () => {
     await fetchContacts(false);
@@ -75,4 +78,3 @@ export function useContactList(): UseContactListReturn {
     retryFetch,
   };
 }
-

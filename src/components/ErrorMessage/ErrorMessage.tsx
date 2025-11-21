@@ -17,4 +17,3 @@ export const ErrorMessage = ({ message, onRetry }: ErrorMessageProps) => {
     </div>
   );
 };
-

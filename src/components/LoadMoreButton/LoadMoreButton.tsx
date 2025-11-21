@@ -20,4 +20,3 @@ export const LoadMoreButton = ({ onClick, disabled = false, loading = false }: L
     </div>
   );
 };
-
