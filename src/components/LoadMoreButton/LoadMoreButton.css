@@ -1,0 +1,35 @@
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+}
+
+.load-more-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 140px;
+}
+
+.load-more-button:hover:not(:disabled) {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+}
+
+.load-more-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.load-more-button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
