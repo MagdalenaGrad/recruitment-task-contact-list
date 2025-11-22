@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { PersonInfo } from '../PersonInfo';
-import { mockContact } from '../../../test-utils';
+import { PersonInfo } from './PersonInfo';
+import { mockContact } from '../../test-utils';
 
 describe('PersonInfo', () => {
   test('should render contact information correctly', () => {

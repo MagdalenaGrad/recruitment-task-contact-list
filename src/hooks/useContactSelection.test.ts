@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { useContactSelection } from '../useContactSelection';
+import { useContactSelection } from './useContactSelection';
 
 describe('useContactSelection', () => {
   test('should initialize with empty selection', () => {
