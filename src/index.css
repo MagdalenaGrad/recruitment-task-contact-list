@@ -1,9 +1,24 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
+  padding: 0;
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #f4f4f4;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 code {
@@ -11,42 +26,20 @@ code {
     monospace;
 }
 
-.App {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: space-between;
-  margin: 20px 0;
+@media (min-width: 480px) {
+  body {
+    font-size: 14px;
+  }
 }
 
-.selected {
-  color: #333333;
-  font-size: 26px;
-  font-weight: 700;
-  margin: 10px 20px 0 0;
+@media (min-width: 768px) {
+  body {
+    font-size: 15px;
+  }
 }
 
-.person-info:hover {
-  padding: 30px;
-  border: 2px solid pink;
-}
-
-.firstNameLastName {
-  padding: 0 0 10px;
-  color: #333333;
-  font-size: 26px;
-  font-weight: 700;
-}
-
-.jobTitle {
-  padding: 0 0 20px;
-  color: #e74c3c;
-  font-size: 20px;
-  font-weight: 400;
-}
-
-.emailAddress {
-  color: #666666;
-  font-size: 14px;
-  line-height: 1.8em;
+@media (min-width: 1024px) {
+  body {
+    font-size: 16px;
+  }
 }
