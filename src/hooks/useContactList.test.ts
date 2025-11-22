@@ -1,9 +1,9 @@
 import { renderHook, waitFor, act } from '@testing-library/react';
-import { useContactList } from '../useContactList';
-import apiData from '../../api';
-import { createMockContacts, LOADING_STATE_DELAY, PAGE_SIZE } from '../../test-utils';
+import { useContactList } from './useContactList';
+import apiData from '../api';
+import { createMockContacts, LOADING_STATE_DELAY, PAGE_SIZE } from '../test-utils';
 
-jest.mock('../../api', () => ({
+jest.mock('../api', () => ({
   __esModule: true,
   default: jest.fn(),
 }));
