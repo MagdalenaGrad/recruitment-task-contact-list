@@ -1,16 +1,20 @@
-import React from "react";
+import { memo } from "react";
 import { Contact } from "../../types";
 import { getInitials } from "../../utils/formatters";
 import "./PersonInfo.css";
 
 interface PersonInfoProps {
   data: Contact;
+  isSelected: boolean;
+  onSelect: (id: string) => void;
 }
 
-export const PersonInfo = ({ data }: PersonInfoProps) => {
-
+export const PersonInfo = memo(({ data, isSelected, onSelect }: PersonInfoProps) => {
   return (
-    <div className="person-info">
+    <div 
+      className={`person-info ${isSelected ? "selected" : ""}`}
+      onClick={() => onSelect(data.id)}
+    >
       <div className="person-info-header">
         <div className="person-initials-circle">
           {getInitials(data.firstNameLastName)}
@@ -23,4 +27,4 @@ export const PersonInfo = ({ data }: PersonInfoProps) => {
       <div className="person-email">{data.emailAddress}</div>
     </div>
   );
-};
+});

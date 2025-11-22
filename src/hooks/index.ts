@@ -1,2 +1,2 @@
 export { useContactList } from "./useContactList";
-export { useBreakpoints } from "./useBreakpoints";
+export { useContactSelection } from "./useContactSelection";

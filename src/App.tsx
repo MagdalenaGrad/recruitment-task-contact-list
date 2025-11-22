@@ -1,15 +1,41 @@
-import React from "react";
+import { useMemo } from "react";
 import { PersonInfo } from "./components/PersonInfo";
 import { Loader } from "./components/Loader";
 import { ErrorMessage } from "./components/ErrorMessage";
 import { LoadMoreButton } from "./components/LoadMoreButton";
-import { useContactList } from "./hooks/useContactList";
+import { useContactList, useContactSelection } from "./hooks";
+import { Contact } from "./types";
 import "./App.css";
 
 export const App = () => {
-  const { contacts, loadingState, error, hasMore, loadMore, retryFetch } = useContactList();
+  const {
+    selectedIds,
+    selectionOrder,
+    handleToggle
+  } = useContactSelection();
 
-  const isInitialLoading = loadingState === "loading" && contacts.length === 0;
+  const {
+    contacts,
+    loadingState,
+    error,
+    hasMore,
+    loadMore,
+    retryFetch
+  } = useContactList();
+
+  const sortedContacts = useMemo(() => {
+    const contactsMap = new Map(contacts.map(c => [c.id, c]));
+    
+    const selectedInOrder = selectionOrder
+      .map(id => contactsMap.get(id))
+      .filter((contact): contact is Contact => contact !== undefined);
+    
+    const unselected = contacts.filter(contact => !selectedIds.has(contact.id));
+    
+    return [...selectedInOrder, ...unselected];
+  }, [contacts, selectedIds, selectionOrder]);
+
+  const isInitialLoading = loadingState === "loading";
   const isInitialError = loadingState === "error" && contacts.length === 0;
   const isLoadingMore = loadingState === "loadingMore";
   const isLoadMoreError = loadingState === "error" && contacts.length > 0;
@@ -37,8 +63,13 @@ export const App = () => {
   return (
     <div className="App">
       <div className="list">
-        {contacts.map((contact) => (
-          <PersonInfo key={contact.id} data={contact} />
+        {sortedContacts.map((contact) => (
+          <PersonInfo 
+            key={contact.id} 
+            data={contact} 
+            isSelected={selectedIds.has(contact.id)}
+            onSelect={handleToggle}
+          />
         ))}
       </div>
 
@@ -49,13 +80,11 @@ export const App = () => {
         />
       )}
 
-      {isLoadingMore && (
-        <Loader text="Loading more contacts..." />
-      )}
-
-      {canLoadMore && (
+      {(canLoadMore || isLoadingMore) && (
         <LoadMoreButton
           onClick={loadMore}
+          loading={isLoadingMore}
+          disabled={isLoadingMore}
         />
       )}
 

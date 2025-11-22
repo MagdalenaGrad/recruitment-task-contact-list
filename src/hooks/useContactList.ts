@@ -27,9 +27,12 @@ export function useContactList(): UseContactListReturn {
 
     isFetchingRef.current = true;
     
-    // Set appropriate loading state
-    const currentLoadingState = contacts.length === 0 ? "loading" : "loadingMore";
-    setLoadingState(currentLoadingState);
+    // Set appropriate loading state using functional update to get current contacts length
+    setContacts((prevContacts) => {
+      const currentLoadingState = prevContacts.length === 0 ? "loading" : "loadingMore";
+      setLoadingState(currentLoadingState);
+      return prevContacts; // Return unchanged
+    });
     setError(null);
 
     try {
@@ -57,7 +60,7 @@ export function useContactList(): UseContactListReturn {
   }, [hasMore]);
 
   const loadMore = useCallback(async () => {
-    await fetchContacts(false);
+    await fetchContacts(false)
   }, [fetchContacts]);
 
   const retryFetch = useCallback(async () => {

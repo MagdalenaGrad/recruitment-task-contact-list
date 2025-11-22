@@ -31,7 +31,7 @@
 }
 
 .load-more-button:disabled {
-  background-color: #bdc3c7;
+  background-color: #7faccb;
   cursor: not-allowed;
   opacity: 0.6;
 }
